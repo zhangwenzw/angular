@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="node_modules/angular/angular.min.js"></script>
+</head>
+<!--angularjs-->
+<body ng-app >
+<input type="text" ng-model="one">
++
+<input type="text" ng-model="two">
+=
+<span>{{one*1+two*1}}</span>
+
+
+<!--js-->
+<!--<input type="text" class="num1">-->
+<!--+-->
+<!--<input type="text" class="num2">-->
+<!--=-->
+<!--<input type="text" class="sum">-->
+</body>
+<script>
+//    var num1=document.getElementsByClassName("num1")[0];
+//    var num2=document.getElementsByClassName("num2")[0];
+//    var sum=document.getElementsByClassName("sum")[0];
+//    num1.oninput=function(){
+//        var num1Val=parseFloat(this.value)?parseFloat(this.value):0;
+//        var num2Val=parseFloat(num2.value)?parseFloat(num2,value):0;
+//        sum.value=num1Val+num2Val;
+//    }
+//    num2.oninput=function(){
+//        var num1Val=parseFloat(num1.value)?parseFloat(num1.value):0;
+//        var num2Val=parseFloat(this.value)?parseFloat(this.value):0;
+//        sum.value=num1Val+num2Val;
+//    }
+</script>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="node_modules/angular/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <!--控制器-->
+    <div ng-controller="ctrl">
+        <!--视图-->
+        <input type="text" ng-model="aa">
+        {{aa}}
+    </div>
+    <script>
+        /*数据*/
+        angular.module("myapp",[]).controller("ctrl",function($scope){
+            $scope.aa="123";
+        })
+    </script>
+</body>
+</html>
