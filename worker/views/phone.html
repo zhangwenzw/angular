@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="stylesheets/index.css">
+    <script src="javascripts/angular/angular.js"></script>
+    <script src="javascripts/jquery.js"></script>
+    <script src="javascripts/size.js"></script>
+    <script src="javascripts/iscroll.js"></script>
+    <script src="javascripts/phone.js"></script>
+
+    <title>Document</title>
+</head>
+<body ng-app="myapp">
+<header>
+    <h1>通讯录</h1>
+    <input type="text" placeholder="搜索联系人" ng-model="search">
+</header>
+<div id="wrapper" ng-controller="phone">
+    <div id="scroller">
+        <ul class="phone-con">
+            <li ng-repeat="item in data | filter:{$:search} track by $index">
+                <div>{{item.en|uppercase}}</div>
+                <ul>
+                    <li ng-repeat="item1 in item | filter:{$:search} track by $index">
+                        <a href="tel:{{item1.phone}}">
+                            <span>{{item1.name}}</span>
+                            <span>{{item1.phone}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <ul class="en">
+        <li ng-repeat="item2 in en" ng-click="check(item2)">
+            {{item2|uppercase}}
+        </li>
+    </ul>
+</div>
+</body>
+<script>
+    $(function() {
+        var myScroll = new IScroll('#wrapper', {mouseWheel: true, click: true});
+        document.addEventListener('touchmove', function (e) {
+            e.preventDefault();
+        }, false);
+    })
+</script>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>directive</title>
+    <!--<script src="../public/javascripts/angular/angular.js"></script>-->
+    <!--<script src="directive.js"></script>-->
+</head>
+<body ng-app="myapp">
+<!--组件-->
+<!--复用 函数 组件 -->
+    <div menu>123</div>
+
+<div style="width:200px;height:200px;border:1px solid #ccc"></div>
+<button>提交</button>
+</body>
+<script>
+
+//    angular 路由的本质
+window.onpopstates=function() {
+    var url = location.href;
+    if (url.indexOf("#") > -1) {
+        var ajaxurl = url.slice(url.indexOf("#") + 1);
+        var xmlObj = new XMLHttpRequest();
+        xmlObj.onload = function () {
+            document.querySelector("div").innerHTML = xmlObj.response;
+            xmlObj.open("get", ajaxurl);
+            xmlObj.send();
+        }
+    }
+    document.querySelector("button").onclick = function () {
+        var newurl = url + "#demo1.html";
+        location.href = newurl;
+        var ajaxurl = url.slice(url.indexOf("#") + 1);
+        var xmlObj = new XMLHttpRequest();
+        xmlObj.onload = function () {
+            document.querySelector("div").innerHTML = xmlObj.response;
+            xmlObj.open("get", "demo1.html");
+            xmlObj.send();
+        }
+    }
+}
+//angular.module("myapp",["directive"])
+</script>
+</html>

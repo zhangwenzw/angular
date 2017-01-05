@@ -1,0 +1,62 @@
+body,a,ul,ol,li,input,p,h1,h2,h3,h4,h5,h6{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+img{
+    border: 0;
+}
+a{
+    text-decoration: none;
+}
+/*消除默认样式*/
+a,button{
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+button{
+    -webkit-appearance: none;
+}
+body{
+    /*禁止用户设置字体大小*/
+    -webkit-text-size-adjust: 100%;
+    /*禁止文字选中*/
+    -webkit-user-select: none;
+}
+html,body{
+    width:7.5rem;height:13.34rem;overflow: hidden;background:#eee;font-size:0.3rem;
+}
+header{
+    width:7.5rem;font-size:0.3rem;color:#333;
+}header>h1{
+    text-align: center;line-height:1.3rem;border-bottom:0.03rem solid #999;background:#E8E8E8;font-size:0.6rem;
+ }
+ header>input{
+     margin:0.2rem;border:0.03rem solid #ccc;border-radius:0.5rem;font-size:0.3rem;line-height: 0.6rem;width:7.1rem;padding-left: 0.2rem;box-sizing: border-box;
+ }
+ #wrapper{
+     width:100%;height:11.04rem;position: absolute;top:2.3rem;left:0;overflow: hidden;
+ }
+ .phone-con{
+    width:100%;
+ }
+ .phone-con li{
+     width:100%;
+ }
+ .phone-con>li>div{
+     box-sizing: border-box;padding:0 0.3rem;background:#ddd;color:#666;line-height:0.5rem;
+ }
+.phone-con>li>ul{
+    width:100%;box-sizing: border-box;padding:0 0.3rem;
+}
+.phone-con>li>ul a{
+    display:block;color:#333;line-height: 0.7rem;border-bottom:0.01rem solid #ccc;text-align: center;
+}
+.phone-con>li>ul a>span:first-child{
+    float:left;
+}
+.phone-con>li>ul>li:last-of-type a{
+    border:0;
+}
+.en{
+    width:0.3rem;height:11.04rem;display: flex;flex-direction: column;position: absolute;right:0;top:0;justify-content: space-around;
+}
