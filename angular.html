@@ -9,12 +9,14 @@
     <script src="node_modules/angular/angular.min.js"></script>
 </head>
 <!--angularjs-->
-<body ng-app >
+<body ng-app ng-init="one=10;two=0">
 <input type="text" ng-model="one">
 +
 <input type="text" ng-model="two">
 =
-<span>{{one*1+two*1}}</span>
+<!--<span>{{one*1+two*1}}</span>-->
+<input type="text" ng-model="one*1+two*1">
+
 
 
 <!--js-->

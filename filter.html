@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body>
+{{[5,2,3,4] | min}}
+</body>
+<script>
+    function $filter(type){
+        return function(origin){
+            if(type=="min") {
+                var temp = origin[0]
+                for (var i = 0; i < origin.length; i++) {
+                    if (origin[i] < temp) {
+                        temp = origin[i];
+                    }
+                }
+                return temp;
+            }else{
+                alert(1)
+            }
+        }
+    }
+    //    console.log($filter("min")([1,2,3,4]));
+    function tpl(){
+        var reg=/\{\{([^\|]+)\|([^:\}]+)\}\}/g;
+        var str=document.body.innerHTML;
+        var newstr=str.replace(/\s/g,"").replace(reg,function(a,b,c){
+            var a=$filter(c)(JSON.parse(b));
+            return a;
+        })
+        document.body.innerHTML=newstr;
+    }
+    window.onload=function(){
+        tpl();
+    }
+</script>
+</html>

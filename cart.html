@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="filters.js"></script>
+    <style>
+        body{
+            padding:20px 0;
+        }
+        .dropdown{
+            display: inline-block;margin-bottom:10px;
+        }
+        table,th,tr,td,input{
+            text-align: center;
+        }
+    </style>
+</head>
+<body ng-app="myapp" ng-controller="cart">
+<!--{{date|date:"yyyy-MM-dd  hh:mm:ss"}}-->
+    <div style="text-align: center;line-height: 50px;" ng-show="data.length==0">购物车为空哦</div>
+    <label ng-hide="data.length==0">Search: <input ng-model="search"></label>
+
+
+<!--下拉菜单-->
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+            默认排序方式
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation" ng-click="asc()"><a role="menuitem" tabindex="-1" href="#">商品价格升序</a></li>
+            <li role="presentation" ng-click="desc()"><a role="menuitem" tabindex="-1" href="#">商品价格降序</a></li>
+        </ul>
+    </div>
+
+
+
+    <table class="table table-hover" ng-hide="data.length==0">
+        <tr>
+            <th>名称</th>
+            <th>
+                单价
+                <!--<div ng-click="order()" ng-class="dropup:type!=''">-->
+                    <!--<span class="caret"></span>-->
+                <!--</div>-->
+            </th>
+            <th>数量</th>
+            <th>总价</th>
+            <th>操作</th>
+        </tr>
+        <tr ng-repeat="item in data | filter:{name:search} | orderBy:type+ziduan">
+            <td>{{item.name}}</td>
+            <td>{{item.price}}</td>
+            <td>
+                <div class="input-group" style="width:120px;margin:auto">
+                    <span class="input-group-addon" ng-click="jian(item.id)">-</span>
+                    <input type="text" class="form-control" placeholder="{{item.num}}">
+                    <span class="input-group-addon" ng-click="jia(item.id)">+</span>
+                </div>
+            </td>
+            <td>{{item.price*item.num}}</td>
+            <td><button class="btn btn-danger" ng-click="del(item.id)">删除</button></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>总数量  {{getNum()}}</td>
+            <td>总价  {{getPrice()}}</td>
+            <td><button class="btn btn-danger" ng-click="clear()">清空购物车</button></td>
+        </tr>
+    </table>
+{{[1,2,3,4]|minOrMax:"max"}}
+</body>
+<script>
+    angular.module("myapp",["filters"])
+            .controller("cart",["$scope","$filter","$http",function($scope,$filter,$http){/*$http:ajax*/
+                $scope.type="";
+                $scope.ziduan="price";
+//                $scope.date=new Date().getTime();
+                $scope.data=[
+                    {
+                        id:1,
+                        name:"上衣",
+                        price:"100",
+                        num:"1"
+                    },
+                    {
+                        id:2,
+                        name:"裤子",
+                        price:"200",
+                        num:"1"
+                    },
+                    {
+                        id:3,
+                        name:"鞋子",
+                        price:"150",
+                        num:"2"
+                    }
+                    ,{
+                        id:4,
+                        name:"帽子",
+                        price:"300",
+                        num:"1"
+                    }
+                ];
+                $scope.getPrice=function(){
+                    var price=0;
+                    $scope.data.forEach(function(obj,index){
+                        price+=obj.price*obj.num;
+                    })
+                    return price;
+                }
+                $scope.getNum=function(){
+                    var nums=0;
+                    angular.forEach($scope.data,function(obj,index){
+                        var num=obj.num;
+                        if(parseInt(num)&&parseInt(num)>0){
+                            nums+=num*1;
+                        }else{
+                            obj.num="";
+                        }
+                    })
+                    return nums;
+                }
+                $scope.del=function(id){
+                    for(var i=0;i<$scope.data.length;i++){
+                        if(id==$scope.data[i].id){
+                            $scope.data.splice(i,1);
+                        }
+                    }
+                }
+                $scope.jian=function(id){
+                    for(var i=0;i<$scope.data.length;i++){
+                        if(id==$scope.data[i].id){
+                            $scope.data[i].num--;
+                            if($scope.data[i].num<1){
+                                $scope.data[i].num=1;
+                                alert("不能再减了噢");
+                            }
+                        }
+                    }
+                }
+                $scope.jia=function(id){
+                    for(var i=0;i<$scope.data.length;i++){
+                        if(id==$scope.data[i].id){
+                            $scope.data[i].num++;
+                        }
+                    }
+                }
+                $scope.clear=function(){
+                    $scope.data=[];
+                }
+                $scope.asc=function () {
+                    $scope.type="";
+                }
+                $scope.desc=function () {
+                    $scope.type="-";
+                }
+            }]);
+</script>
+</html>

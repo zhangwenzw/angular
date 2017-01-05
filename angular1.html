@@ -13,13 +13,34 @@
     <div ng-controller="ctrl">
         <!--视图-->
         <input type="text" ng-model="aa">
-        {{aa}}
+        +
+        <!--angular的表达式/模版引擎   如果angular没有加载完成则{{aa}}不会变化，则用ng-bind来代替-->
+        <!--<span ng-bind="aa">-->
+        <!--</span>-->
+        <!--{{aa}}-->
+        <input type="text" ng-model="bb">
+        =
+        <input type="text" ng-model="cc">
     </div>
-    <script>
-        /*数据*/
-        angular.module("myapp",[]).controller("ctrl",function($scope){
-            $scope.aa="123";
-        })
-    </script>
+
 </body>
+<script>
+    /*数据
+     * 依赖注入  $scope 程序内部创建的的一个对象，依赖$scope，通过正则注入
+     * 在控制器上绑定$scope控制数据
+     * */
+            angular.module("myapp",[])
+                    .controller("ctrl",function($scope){
+                        $scope.aa=10;
+                        $scope.bb=5;
+                        $scope.cc=$scope.aa*1+$scope.bb*1;
+                        $scope.$watch("aa",function(){
+                            $scope.cc=$scope.aa*1+$scope.bb*1;
+                        })
+
+                        $scope.$watch("bb",function(){
+                            $scope.cc=$scope.aa*1+$scope.bb*1;
+                        })
+                    })
+</script>
 </html>
